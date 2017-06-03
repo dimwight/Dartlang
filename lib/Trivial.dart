@@ -32,29 +32,20 @@ typedef String GetNumberText(int n);
 class Getter {
 
   final GetNumberValue getFirstFn, getSecondFn;
-
-//Can't be final; a small language inconsistency?
   GetNumberText getText;
 
-  final int _first,_second;
+  final int first,second;
 
-  Getter._core(this.getFirstFn, this.getSecondFn,
-      this._first, this._second,
-      [getText]) {
+  Getter({this.getFirstFn, this.getSecondFn,
+      this.first=-1, this.second=-1,
+      this.getText}) {
 //  Has to be set in body, so not final
     this.getText = getText != null ? getText
         : (int n) => '$n';
   }
 
-  Getter.fn(GetNumberValue getSmall, GetNumberValue getLarger,
-  [Function getText]):
-    this._core(getSmall,getLarger,-1,-1,getText);
-
-  Getter.num(int small, int larger)
-  :this._core(null,null,small,larger,null);
-
-  int getFirst()=>getFirstFn==null?_first:getFirstFn();
-  int getSecond()=>getSecondFn==null?_second:getSecondFn();
+  int getFirst()=>getFirstFn==null?first:getFirstFn();
+  int getSecond()=>getSecondFn==null?second:getSecondFn();
 }
 
 ///Exactly the same interface, overrides methods to use Getter

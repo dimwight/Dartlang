@@ -2,27 +2,30 @@ import 'package:Dartlang/Trivial.dart';
 
 ///Top-level function for passing to Getter, with local closure  
 String getText(int a) {
-  String size = a < 6 ? small : a < 10 ? larger : big;
+  String size = a < 6 ? smallTxt : a < 10 ? largerTxt : bigTxt;
   return '$a (a $size number)';
 }
 
-String small = 'small',
-    larger = 'larger',
-    big = 'big';
+String smallTxt = 'small',
+    largerTxt = 'larger',
+    bigTxt = 'big';
 
-GetNumberValue getSmall = () => 5,
-    getLarger = () => 7;
+int smallNum = 1,
+    largerNum = 2;
 
 ///Range of constructors
-Getter getNumbers = new Getter.num(6, 10), //Simple numbers
+Getter getNumbers = new Getter(
+    first: smallNum, second: largerNum), //Simple numbers fixed at construction
 
-//Closures simulating Java anonymous local
-    getNumbersFn = new Getter.fn(getSmall, getLarger),
-    getTexts = new Getter.fn(getSmall, getLarger, getText);
+///Mixing parameters and closures to simulate Java anonymous locals
+///overriding inherited methods
+    getNumbersFn = new Getter(getFirstFn: () => smallNum,
+        getSecondFn: () => smallNum),
+    getTexts = new Getter(first: 6, second: 10, getText: getText);
 
 main(List<String> arguments) {
   //Abstract types
-  Adding core = new Core(1, 2), //Basic mechanism
+  Adding core = new Core(smallNum, largerNum), //Basic mechanism
       gettingNumbers = new WithGetter(getNumbers),
       gettingNumbersFn = new WithGetter(getNumbersFn),
       gettingTexts = new WithGetter(getTexts);
@@ -31,6 +34,10 @@ main(List<String> arguments) {
     gettingNumbers,
     gettingNumbersFn,
     gettingTexts
-  ].forEach((Core a) => print('${a.output()}'));
+  ].forEach((Core a) {
+    smallNum+=1;
+    largerNum+=2;
+    print('${a.output()}');
+  });
 }
 
