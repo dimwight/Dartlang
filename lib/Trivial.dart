@@ -2,6 +2,10 @@
 abstract class Adding {
   final int _first, _second;
 
+  int _getFirst ()=> _first;
+
+  int _getSecond ()=> _second;
+
   Adding(this._first, this._second);
 
   String output();
@@ -9,11 +13,11 @@ abstract class Adding {
 ///Supplies basic mechanism.
 class Core extends Adding {
 
-  String get _firstText => '$_first';
+  String get _firstText => '${_getFirst()}';
 
-  String get _secondText => '$_second';
+  String get _secondText => '${_getSecond()}';
 
-  String get _sumText => '${_first + _second}';
+  String get _sumText => '${_getFirst() + _getSecond()}';
 
   Core(first, second) : super(first, second);
 
@@ -56,12 +60,16 @@ class WithGetter extends Core {
       : super(_getter.getFirst(), _getter.getSecond());
 
   @override
-  String get _firstText => _getter.getText(_first);
+  int _getFirst ()=> _getter.getFirst();
+  @override
+  int _getSecond ()=> _getter.getSecond();
+  @override
+  String get _firstText => _getter.getText(_getFirst ());
 
   @override
-  String get _secondText => _getter.getText(_second);
+  String get _secondText => _getter.getText(_getSecond ());
 
   @override
-  String get _sumText => _getter.getText(_first + _second);
+  String get _sumText => _getter.getText(_getFirst () + _getSecond ());
 
 }

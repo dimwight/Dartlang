@@ -15,12 +15,12 @@ int smallNum = 1,
 
 ///Range of constructors
 Getter getNumbers = new Getter(
-    first: smallNum, second: largerNum), //Simple numbers fixed at construction
+    getFirstFn: smallNumFn, second: largerNum), //Dynamic numbers
 
 ///Mixing parameters and closures to simulate Java anonymous locals
 ///overriding inherited methods
-    getNumbersFn = new Getter(getFirstFn: () => smallNum,
-        getSecondFn: () => smallNum),
+    getNumbersFn = new Getter(getFirstFn: smallNumFn,
+        getSecondFn: () => largerNum),
     getTexts = new Getter(first: 6, second: 10, getText: getText);
 
 main(List<String> arguments) {
@@ -41,3 +41,8 @@ main(List<String> arguments) {
   });
 }
 
+
+int smallNumFn() {
+  print('smallNumFn: $smallNum');
+  return smallNum;
+}
