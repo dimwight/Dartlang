@@ -10,22 +10,26 @@ String small = 'small',
     larger = 'larger',
     big = 'big';
 
-GetNumberValue getSmall=() => 5,getLarger=() => 7;
+GetNumberValue getSmall = () => 5,
+    getLarger = () => 7;
 
-Getter getNumbers = new Getter(getSmall,getLarger),//Uses default for text
-    getTexts = new Getter(
-        getSmall,getLarger,
-        ///Passes in closure thus simulating Java anonymous local
-        getText);
+///Range of constructors
+Getter getNumbers = new Getter.num(6, 10), //Simple numbers
+
+//Closures simulating Java anonymous local
+    getNumbersFn = new Getter.fn(getSmall, getLarger),
+    getTexts = new Getter.fn(getSmall, getLarger, getText);
 
 main(List<String> arguments) {
   //Abstract types
-  Adding core = new Core(1, 2),//Basic mechanism
+  Adding core = new Core(1, 2), //Basic mechanism
       gettingNumbers = new WithGetter(getNumbers),
+      gettingNumbersFn = new WithGetter(getNumbersFn),
       gettingTexts = new WithGetter(getTexts);
   <Core>[
     core,
     gettingNumbers,
+    gettingNumbersFn,
     gettingTexts
   ].forEach((Core a) => print('${a.output()}'));
 }
