@@ -1,4 +1,4 @@
-/*Defines exportable interface*/
+///Defines exportable interface
 abstract class Adding {
   final int _first, _second;
 
@@ -6,7 +6,7 @@ abstract class Adding {
 
   String output();
 }
-/*Supplies basic mechanism.*/
+///Supplies basic mechanism.
 class Core extends Adding {
 
   String get _firstText => '$_first';
@@ -23,17 +23,17 @@ class Core extends Adding {
   }
 }
 
-/*Type everything you can!*/
+///Type everything you can!
 typedef int GetNumberValue();
 typedef String GetNumberText(int n);
 
-/*An obvious extension using functions to supply parameters*/
+///An obvious extension using functions to supply parameters
 class WithFunctions extends Core {
   WithFunctions(GetNumberValue first, GetNumberValue second)
       : super(first(), second());
 }
 
-/* Bundles parameter functions, one with built-in default*/
+/// Bundles parameter functions, one with built-in default
 class Getter {
 
   final GetNumberValue getFirst, getSecond;
@@ -48,7 +48,7 @@ class Getter {
   }
 }
 
-/*Exactly the same interface, overrides methods to use Getter*/
+///Exactly the same interface, overrides methods to use Getter
 class WithGetter extends Core {
   final Getter _getter;
 
