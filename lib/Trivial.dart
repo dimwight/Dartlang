@@ -27,12 +27,6 @@ class Core extends Adding {
 typedef int GetNumberValue();
 typedef String GetNumberText(int n);
 
-///An obvious extension using functions to supply parameters
-class WithFunctions extends Core {
-  WithFunctions(GetNumberValue first, GetNumberValue second)
-      : super(first(), second());
-}
-
 /// Bundles parameter functions, one with built-in default
 class Getter {
 

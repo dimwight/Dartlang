@@ -10,23 +10,21 @@ String small = 'small',
     larger = 'larger',
     big = 'big';
 
-Getter getNumbers = new Getter( //Uses default for text
-        () => 5,
-        () => 6),
+GetNumberValue getSmall=() => 5,getLarger=() => 7;
+
+Getter getNumbers = new Getter(getSmall,getLarger),//Uses default for text
     getTexts = new Getter(
-            () => 5,
-            () => 6,
-        ///Passes in closure thus simulating Java
+        getSmall,getLarger,
+        ///Passes in closure thus simulating Java anonymous local
         getText);
 
 main(List<String> arguments) {
-  Adding core = new Core(1, 2),
-      functions = new WithFunctions(() => 3, () => 4),
+  //Abstract types
+  Adding core = new Core(1, 2),//Basic mechanism
       gettingNumbers = new WithGetter(getNumbers),
       gettingTexts = new WithGetter(getTexts);
   <Core>[
     core,
-    functions,
     gettingNumbers,
     gettingTexts
   ].forEach((Core a) => print('${a.output()}'));
