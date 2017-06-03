@@ -1,3 +1,3 @@
-# Changelog for 1.06
+# Changelog for 1.07
 
 - With Trivial 
