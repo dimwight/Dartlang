@@ -1,4 +1,4 @@
-///Defines exportable interface
+///Defines exportable interface.
 abstract class Adding {
   final int _first;
 
@@ -57,11 +57,11 @@ class Coupler {
 
 }
 
-///Exactly the same interface, overrides methods to use Getter
-class WithGetter extends Core {
+///Exactly the same interface, overrides methods to use Coupler.
+class WithCoupler extends Core {
   final Coupler _getter;
 
-  WithGetter(Coupler this._getter)
+  WithCoupler(Coupler this._getter)
       : super(_getter.getFirst());
 
   @override

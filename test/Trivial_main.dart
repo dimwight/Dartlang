@@ -1,14 +1,14 @@
 import 'package:Dartlang/Trivial.dart';
 
 ///Top-level function for passing to Getter, with local closure  
+String smallTxt = 'small',
+    largerTxt = 'larger',
+    bigTxt = 'big';
+
 String getText(int a) {
   String size = a < 6 ? smallTxt : a < 10 ? largerTxt : bigTxt;
   return '$a (a $size number)';
 }
-
-String smallTxt = 'small',
-    largerTxt = 'larger',
-    bigTxt = 'big';
 
 int smallNum = 1,
     largerNum = 1;
@@ -20,14 +20,14 @@ Coupler getNumbers = new Coupler(
 ///Mixing parameters and closures to simulate Java anonymous locals
 ///overriding inherited methods
     getNumbersFn = new Coupler(firstFn: smallNumFn),
-    getTexts = new Coupler(first: 6, numberTextFn: getText);
+    getTexts = new Coupler(first: smallNum, numberTextFn: getText);
 
 main(List<String> arguments) {
   //Abstract types
   Adding core = new Core(smallNum), //Basic mechanism
-      gettingNumbers = new WithGetter(getNumbers),
-      gettingNumbersFn = new WithGetter(getNumbersFn),
-      gettingTexts = new WithGetter(getTexts);
+      gettingNumbers = new WithCoupler(getNumbers),
+      gettingNumbersFn = new WithCoupler(getNumbersFn),
+      gettingTexts = new WithCoupler(getTexts);
   <Core>[
     core,
     gettingNumbers,
