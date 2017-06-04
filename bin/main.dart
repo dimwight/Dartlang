@@ -15,12 +15,12 @@ int smallNum = 1,
 
 ///Range of constructors
 Getter getNumbers = new Getter(
-    getFirstFn: smallNumFn), //Dynamic number
+    firstFn: smallNumFn), //Dynamic number
 
 ///Mixing parameters and closures to simulate Java anonymous locals
 ///overriding inherited methods
-    getNumbersFn = new Getter(getFirstFn: smallNumFn),
-    getTexts = new Getter(first: 6, getText: getText);
+    getNumbersFn = new Getter(firstFn: smallNumFn),
+    getTexts = new Getter(first: 6, numberTextFn: getText);
 
 main(List<String> arguments) {
   //Abstract types

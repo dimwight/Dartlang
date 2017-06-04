@@ -36,26 +36,24 @@ class Core extends Adding {
 }
 
 ///Type everything you can!
-typedef int GetNumberValue();
-typedef String GetNumberText(int n);
+typedef int NumberValue();
+typedef String NumberText(int n);
 
-/// Parameter object with two exported constructors,
-/// one with built-in default
+/// Parameter object its own optional parameters
 class Getter {
 
-  final GetNumberValue getFirstFn;
-  GetNumberText getText;
+  final NumberValue firstFn;
+  NumberText numberTextFn;
 
   final int first;
 
-  Getter({this.getFirstFn, this.first = -1,
-    this.getText}) {
+  Getter({this.first = -1, this.firstFn, this.numberTextFn}) {
 //  Has to be set in body, so not final
-    this.getText = getText != null ? getText
+    this.numberTextFn = numberTextFn != null ? numberTextFn
         : (int n) => '$n';
   }
 
-  int getFirst() => getFirstFn == null ? first : getFirstFn();
+  int getFirst() => firstFn == null ? first : firstFn();
 
 }
 
@@ -70,12 +68,12 @@ class WithGetter extends Core {
   int _getFirst() => _getter.getFirst();
 
   @override
-  String get _firstText => _getter.getText(_getFirst());
+  String get _firstText => _getter.numberTextFn(_getFirst());
 
   @override
-  String get _secondText => _getter.getText(_getSecond());
+  String get _secondText => _getter.numberTextFn(_getSecond());
 
   @override
-  String get _sumText => _getter.getText(_getFirst() + _getSecond());
+  String get _sumText => _getter.numberTextFn(_getFirst() + _getSecond());
 
 }
