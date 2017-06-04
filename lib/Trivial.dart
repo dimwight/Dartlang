@@ -12,7 +12,7 @@ abstract class Adding {
 
 }
 
-///Supplies basic mechanism.
+///Supplies basic mechanisms.
 class Core extends Adding {
   int _second;
 
