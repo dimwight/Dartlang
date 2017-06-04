@@ -1,33 +1,33 @@
 ///Defines exportable interface.
-abstract class Adding {
-  final int _first;
+abstract class AddTwoNums {
+  final num _firstNum;
 
-  int _getFirst() => _first;
+  num _getFirstNum() => _firstNum;
 
-  int setSecond(int second);
+  num setSecondNum(num num);
 
   String newSumText();
 
-  Adding(this._first);
+  AddTwoNums(this._firstNum);
 
 }
 
 ///Supplies basic mechanisms.
-class Core extends Adding {
-  int _second;
+class Core extends AddTwoNums {
+  num _second;
 
   @override
-  int setSecond(int second) => this._second = second;
+  num setSecondNum(num second) => this._second = second;
 
   _getSecond() => this._second;
 
-  String get _firstText => '${_getFirst()}';
+  String get _firstText => '${_getFirstNum()}';
 
   String get _secondText => '${_getSecond()}';
 
-  String get _sumText => '${_getFirst() + _getSecond()}';
+  String get _sumText => '${_getFirstNum() + _getSecond()}';
 
-  Core(int first) : super(first);
+  Core(num first) : super(first);
 
   @override
   String newSumText() {
@@ -36,8 +36,8 @@ class Core extends Adding {
 }
 
 ///Type everything you can!
-typedef int NumberValue();
-typedef String NumberText(int n);
+typedef num NumberValue();
+typedef String NumberText(num n);
 
 /// Parameter object with its own optional parameters
 class Coupler {
@@ -45,15 +45,15 @@ class Coupler {
   final NumberValue firstFn;
   NumberText numberTextFn;
 
-  final int first;
+  final num first;
 
   Coupler({this.first = -1, this.firstFn, this.numberTextFn}) {
 //  Has to be set in body, so not final
     this.numberTextFn = numberTextFn != null ? numberTextFn
-        : (int n) => '$n';
+        : (num n) => '$n';
   }
 
-  int getFirst() => firstFn == null ? first : firstFn();
+  num getFirst() => firstFn == null ? first : firstFn();
 
 }
 
@@ -65,15 +65,15 @@ class WithCoupler extends Core {
       : super(_getter.getFirst());
 
   @override
-  int _getFirst() => _getter.getFirst();
+  num _getFirstNum() => _getter.getFirst();
 
   @override
-  String get _firstText => _getter.numberTextFn(_getFirst());
+  String get _firstText => _getter.numberTextFn(_getFirstNum());
 
   @override
   String get _secondText => _getter.numberTextFn(_getSecond());
 
   @override
-  String get _sumText => _getter.numberTextFn(_getFirst() + _getSecond());
+  String get _sumText => _getter.numberTextFn(_getFirstNum() + _getSecond());
 
 }
