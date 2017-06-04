@@ -6,8 +6,8 @@ Trying out the language, with particular reference to
 
 ## Trivial
 
-Tries out Dart alternatives to Java hierarchy
-where the implementation of an unchanging contract
+Tries out Dart alternatives to 'trivial' Java hierarchy
+ie where the implementation of an unchanging contract
 is progressively refined.  
 
 Special focus on finding equivalent 

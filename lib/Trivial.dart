@@ -1,79 +1,88 @@
 ///Defines exportable interface.
-abstract class AddTwoNums {
+abstract class SumTwoNums {
   final num _firstNum;
 
-  num _getFirstNum() => _firstNum;
+  SumTwoNums(this._firstNum);
 
-  num setSecondNum(num num);
+  setSecondNum(num second);
 
-  String newSumText();
-
-  AddTwoNums(this._firstNum);
+  String newOutputText();
 
 }
 
 ///Supplies basic mechanisms.
-class Core extends AddTwoNums {
+class Core extends SumTwoNums {
   num _second;
 
   @override
-  num setSecondNum(num second) => this._second = second;
+  setSecondNum(num second) => this._second = second;
 
   _getSecond() => this._second;
 
-  String get _firstText => '${_getFirstNum()}';
+  String get _firstText => '${_firstNum}';
 
   String get _secondText => '${_getSecond()}';
 
-  String get _sumText => '${_getFirstNum() + _getSecond()}';
+  String get _sumText => '${_firstNum + _getSecond()}';
 
   Core(num first) : super(first);
 
   @override
-  String newSumText() {
+  String newOutputText() {
     return '${runtimeType}.output: $_firstText + $_secondText = ${_sumText}';
   }
 }
 
 ///Type everything you can!
-typedef num NumberValue();
-typedef String NumberText(num n);
+typedef num NumValue();
+typedef String NumText(num n);
 
 /// Parameter object with its own optional parameters
 class Coupler {
 
-  final NumberValue firstFn;
-  NumberText numberTextFn;
+  final NumValue firstFn;
+  NumText numTextFn;
 
   final num first;
 
-  Coupler({this.first = -1, this.firstFn, this.numberTextFn}) {
+  Coupler({this.first = -1, this.firstFn, this.numTextFn}) {
 //  Has to be set in body, so not final
-    this.numberTextFn = numberTextFn != null ? numberTextFn
+    this.numTextFn = numTextFn != null ? numTextFn
         : (num n) => '$n';
   }
 
   num getFirst() => firstFn == null ? first : firstFn();
 
+  output(String newSumText) {
+    print('$newSumText');
+
+  }
+
 }
 
 ///Exactly the same interface, overrides methods to use Coupler.
 class WithCoupler extends Core {
-  final Coupler _getter;
+  final Coupler _coupler;
 
-  WithCoupler(Coupler this._getter)
-      : super(_getter.getFirst());
-
-  @override
-  num _getFirstNum() => _getter.getFirst();
+  WithCoupler(Coupler this._coupler)
+      : super(_coupler.getFirst());
 
   @override
-  String get _firstText => _getter.numberTextFn(_getFirstNum());
+  setSecondNum(num second){
+    super.setSecondNum(second);
+    _coupler.output(this.newOutputText());
+  }
 
   @override
-  String get _secondText => _getter.numberTextFn(_getSecond());
+  num _getFirstNum() => _coupler.getFirst();
 
   @override
-  String get _sumText => _getter.numberTextFn(_getFirstNum() + _getSecond());
+  String get _firstText => _coupler.numTextFn(_getFirstNum());
+
+  @override
+  String get _secondText => _coupler.numTextFn(_getSecond());
+
+  @override
+  String get _sumText => _coupler.numTextFn(_getFirstNum() + _getSecond());
 
 }
