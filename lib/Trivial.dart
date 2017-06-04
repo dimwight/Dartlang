@@ -1,17 +1,25 @@
 ///Defines exportable interface
 abstract class Adding {
-  final int _first, _second;
+  final int _first;
 
-  int _getFirst ()=> _first;
+  int _getFirst() => _first;
 
-  int _getSecond ()=> _second;
+  int setSecond(int second);
 
-  Adding(this._first, this._second);
+  String newSumText();
 
-  String output();
+  Adding(this._first);
+
 }
+
 ///Supplies basic mechanism.
 class Core extends Adding {
+  int _second;
+
+  @override
+  int setSecond(int second) => this._second = second;
+
+  _getSecond() => this._second;
 
   String get _firstText => '${_getFirst()}';
 
@@ -19,10 +27,10 @@ class Core extends Adding {
 
   String get _sumText => '${_getFirst() + _getSecond()}';
 
-  Core(first, second) : super(first, second);
+  Core(int first) : super(first);
 
   @override
-  String output() {
+  String newSumText() {
     return '${runtimeType}.output: $_firstText + $_secondText = ${_sumText}';
   }
 }
@@ -35,21 +43,20 @@ typedef String GetNumberText(int n);
 /// one with built-in default
 class Getter {
 
-  final GetNumberValue getFirstFn, getSecondFn;
+  final GetNumberValue getFirstFn;
   GetNumberText getText;
 
-  final int first,second;
+  final int first;
 
-  Getter({this.getFirstFn, this.getSecondFn,
-      this.first=-1, this.second=-1,
-      this.getText}) {
+  Getter({this.getFirstFn, this.first = -1,
+    this.getText}) {
 //  Has to be set in body, so not final
     this.getText = getText != null ? getText
         : (int n) => '$n';
   }
 
-  int getFirst()=>getFirstFn==null?first:getFirstFn();
-  int getSecond()=>getSecondFn==null?second:getSecondFn();
+  int getFirst() => getFirstFn == null ? first : getFirstFn();
+
 }
 
 ///Exactly the same interface, overrides methods to use Getter
@@ -57,19 +64,18 @@ class WithGetter extends Core {
   final Getter _getter;
 
   WithGetter(Getter this._getter)
-      : super(_getter.getFirst(), _getter.getSecond());
+      : super(_getter.getFirst());
 
   @override
-  int _getFirst ()=> _getter.getFirst();
-  @override
-  int _getSecond ()=> _getter.getSecond();
-  @override
-  String get _firstText => _getter.getText(_getFirst ());
+  int _getFirst() => _getter.getFirst();
 
   @override
-  String get _secondText => _getter.getText(_getSecond ());
+  String get _firstText => _getter.getText(_getFirst());
 
   @override
-  String get _sumText => _getter.getText(_getFirst () + _getSecond ());
+  String get _secondText => _getter.getText(_getSecond());
+
+  @override
+  String get _sumText => _getter.getText(_getFirst() + _getSecond());
 
 }

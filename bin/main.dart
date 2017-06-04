@@ -15,17 +15,16 @@ int smallNum = 1,
 
 ///Range of constructors
 Getter getNumbers = new Getter(
-    getFirstFn: smallNumFn, second: largerNum), //Dynamic numbers
+    getFirstFn: smallNumFn), //Dynamic number
 
 ///Mixing parameters and closures to simulate Java anonymous locals
 ///overriding inherited methods
-    getNumbersFn = new Getter(getFirstFn: smallNumFn,
-        getSecondFn: () => largerNum),
-    getTexts = new Getter(first: 6, second: 10, getText: getText);
+    getNumbersFn = new Getter(getFirstFn: smallNumFn),
+    getTexts = new Getter(first: 6, getText: getText);
 
 main(List<String> arguments) {
   //Abstract types
-  Adding core = new Core(smallNum, largerNum), //Basic mechanism
+  Adding core = new Core(smallNum), //Basic mechanism
       gettingNumbers = new WithGetter(getNumbers),
       gettingNumbersFn = new WithGetter(getNumbersFn),
       gettingTexts = new WithGetter(getTexts);
@@ -36,13 +35,13 @@ main(List<String> arguments) {
     gettingTexts
   ].forEach((Core a) {
     smallNum+=1;
-    largerNum+=2;
-    print('${a.output()}');
+    a.setSecond(largerNum+=2);
+    print('${a.newSumText()}');
   });
 }
 
 
 int smallNumFn() {
-  print('smallNumFn: $smallNum');
+  if(false)print('smallNumFn: $smallNum');
   return smallNum;
 }
