@@ -1,3 +1,9 @@
-# Changelog for 1.07
+# Changelog for Dartlang 
 
-- With Trivial 
+## 1.06
+
+- Hierarchy now Trivial 
+
+## 1.05
+
+- With Hierarchy demo
