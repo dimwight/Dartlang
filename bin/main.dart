@@ -11,7 +11,7 @@ String smallTxt = 'small',
     bigTxt = 'big';
 
 int smallNum = 1,
-    largerNum = 2;
+    largerNum = 1;
 
 ///Range of constructors
 Coupler getNumbers = new Coupler(
@@ -34,14 +34,13 @@ main(List<String> arguments) {
     gettingNumbersFn,
     gettingTexts
   ].forEach((Core a) {
-    smallNum+=1;
-    a.setSecond(largerNum+=2);
+    a.setSecond(largerNum += 2);
     print('${a.newSumText()}');
+    smallNum += 1;
   });
 }
 
-
 int smallNumFn() {
-  if(false)print('smallNumFn: $smallNum');
+  if (false) print('smallNumFn: $smallNum');
   return smallNum;
 }
