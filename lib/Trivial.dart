@@ -39,15 +39,15 @@ class Core extends Adding {
 typedef int NumberValue();
 typedef String NumberText(int n);
 
-/// Parameter object its own optional parameters
-class Getter {
+/// Parameter object with its own optional parameters
+class Coupler {
 
   final NumberValue firstFn;
   NumberText numberTextFn;
 
   final int first;
 
-  Getter({this.first = -1, this.firstFn, this.numberTextFn}) {
+  Coupler({this.first = -1, this.firstFn, this.numberTextFn}) {
 //  Has to be set in body, so not final
     this.numberTextFn = numberTextFn != null ? numberTextFn
         : (int n) => '$n';
@@ -59,9 +59,9 @@ class Getter {
 
 ///Exactly the same interface, overrides methods to use Getter
 class WithGetter extends Core {
-  final Getter _getter;
+  final Coupler _getter;
 
-  WithGetter(Getter this._getter)
+  WithGetter(Coupler this._getter)
       : super(_getter.getFirst());
 
   @override

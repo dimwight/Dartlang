@@ -14,13 +14,13 @@ int smallNum = 1,
     largerNum = 2;
 
 ///Range of constructors
-Getter getNumbers = new Getter(
+Coupler getNumbers = new Coupler(
     firstFn: smallNumFn), //Dynamic number
 
 ///Mixing parameters and closures to simulate Java anonymous locals
 ///overriding inherited methods
-    getNumbersFn = new Getter(firstFn: smallNumFn),
-    getTexts = new Getter(first: 6, numberTextFn: getText);
+    getNumbersFn = new Coupler(firstFn: smallNumFn),
+    getTexts = new Coupler(first: 6, numberTextFn: getText);
 
 main(List<String> arguments) {
   //Abstract types

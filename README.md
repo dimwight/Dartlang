@@ -6,10 +6,12 @@ Trying out the language, with particular reference to
 
 ## Trivial
 
-Tries out Dart alternatives to Java 'trivial' hierarchy
-(where the implementation of an unchanging contract
-is progressively refined).  
+Tries out Dart alternatives to Java hierarchy
+where the implementation of an unchanging contract
+is progressively refined.  
 
 Special focus on finding equivalent 
-of anonymous local classes as parameter objects.
+of anonymous local classes as parameter objects, 
+especially 'couplers' which supply both parameters 
+and local functionality.
 
